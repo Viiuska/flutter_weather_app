@@ -12,12 +12,14 @@ class WeatherResult {
   int? id;
   String? name;
   int? cod;
+  Snow? snow;
 
   WeatherResult(
       {this.coord,
       this.weather,
       this.base,
       this.main,
+      this.snow,
       this.visibility,
       this.wind,
       this.clouds,
@@ -38,6 +40,7 @@ class WeatherResult {
     }
     base = json['base'];
     main = json['main'] != null ? Main.fromJson(json['main']) : null;
+    snow = json['snow'] != null ? Snow.fromJson(json['snow']) : null;
     visibility = json['visibility'];
     wind = json['wind'] != null ? Wind.fromJson(json['wind']) : null;
     clouds = json['clouds'] != null ? Clouds.fromJson(json['clouds']) : null;
@@ -67,6 +70,9 @@ class WeatherResult {
     }
     if (clouds != null) {
       data['clouds'] = clouds!.toJson();
+    }
+    if (snow != null) {
+      data['snow'] = snow!.toJson();
     }
     data['dt'] = dt;
     if (sys != null) {
@@ -232,5 +238,18 @@ class Sys {
     data['sunrise'] = sunrise;
     data['sunset'] = sunset;
     return data;
+  }
+}
+
+class Snow {
+  double? d1h;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['d1h'] = d1h;
+    return data;
+  }
+
+  Snow.fromJson(Map<String, dynamic> json) {
+    d1h = json['d1h'];
   }
 }

@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class ForecastTileWidget extends StatelessWidget {
   String? temp;
+  String? imageUrl;
   String? time;
 
-  ForecastTileWidget({
-    super.key,
-    required this.temp,
-    required this.time,
-  });
+  ForecastTileWidget(
+      {super.key,
+      required this.temp,
+      required this.time,
+      required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class ForecastTileWidget extends StatelessWidget {
               style: const TextStyle(color: Colors.white),
             ),
             CachedNetworkImage(
-              imageUrl: 'http://openweathermap.org/img/wn/11d.png',
+              imageUrl: this.imageUrl ?? '',
               height: 50,
               width: 50,
               fit: BoxFit.fill,
